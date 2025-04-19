@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Winner</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: backgroundFadeIn 2s forwards;
+        }
+
+        @keyframes backgroundFadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .winner-box {
+            border: 2px solid #1e8449;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            animation: boxFadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes boxFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #27ae60;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+            animation: textFadeIn 2s ease-in-out;
+        }
+
+        @keyframes textFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        p {
+            font-size: 1.5rem;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        strong {
+            font-weight: bold;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="winner-box">
+        <h1>Election Winner</h1>
+        <p><strong>Winner Name:</strong> {{ winner_name }}</p>
+        <p><strong>Total Votes:</strong> {{ vote_count }}</p>
+    </div>
+
+</body>
+</html>

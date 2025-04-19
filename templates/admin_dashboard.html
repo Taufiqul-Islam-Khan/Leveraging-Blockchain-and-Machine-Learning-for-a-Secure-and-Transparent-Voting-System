@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #eee;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 20px auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        
+        <h2>Add a Candidate</h2>
+        <form action="/admin/add_candidate" method="POST">
+            <input type="text" name="candidate_name" placeholder="Candidate Name" required><br>
+            <input type="number" name="candidate_age" placeholder="Candidate Age" required><br>
+            <select name="candidate_gender" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select><br>
+            <input type="text" name="candidate_party" placeholder="Party" required><br>
+            <input type="text" name="candidate_experience" placeholder="Experience" required><br>
+            <input type="text" name="candidate_motto" placeholder="Motto" required><br>
+            <button type="submit">Add Candidate</button>
+        </form>
+
+        <h2>Register Voter</h2>
+        <form action="/admin/register_voter" method="POST">
+            <input type="text" name="voter_id" placeholder="Voter ID" required>
+            <button type="submit">Register Voter</button>
+        </form>
+
+        <h2>End Election</h2>
+        <form action="/admin/end_election" method="POST">
+            <button type="submit">End Election</button>
+        </form>
+
+        <h2>Winner</h2>
+        <form action="/admin/get_winner" method="GET">
+            <button type="submit">Get Winner</button>
+        </form>
+
+        <h3>Candidate List</h3>
+        <ul>
+            {% for candidate in candidates %}
+                <li>{{ candidate[0] }} - {{ candidate[1] }} votes</li>
+            {% endfor %}
+        </ul>
+        
+        <canvas id="voteChart"></canvas>
+
+        <script>
+            // Convert Flask data to a valid JavaScript array
+            const candidates = {{ candidates | tojson }};
+        
+            // Extract names and vote counts
+            const candidateNames = candidates.map(candidate => candidate[0]); // Candidate names
+            const voteCounts = candidates.map(candidate => candidate[1]); // Vote counts
+        
+            // Initialize the chart
+            const ctx = document.getElementById('voteChart').getContext('2d');
+            const voteChart = new Chart(ctx, {
+                type: 'bar', // Change to 'pie' for a pie chart
+                data: {
+                    labels: candidateNames,
+                    datasets: [{
+                        label: 'Votes',
+                        data: voteCounts,
+                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'],
+                        borderColor: '#2e59d9',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>
+
+
+
+

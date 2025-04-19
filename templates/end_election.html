@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>End Election</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid black;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .end-btn {
+            background-color: red;
+            color: white;
+        }
+        .winner-btn {
+            background-color: green;
+            color: white;
+            display: none;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Admin Panel</h2>
+        <h3>End Election</h3>
+        <button class="end-btn" onclick="endElection()">End Election</button>
+        <p id="message"></p>
+        <button class="winner-btn" id="winnerBtn" onclick="viewWinner()">View Winner</button>
+    </div>
+
+    <script>
+        function endElection() {
+            fetch('/admin/end_election', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("message").innerText = "Election Ended! Transaction Hash: " + data.txn_hash;
+                document.getElementById("winnerBtn").style.display = "inline-block";
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        function viewWinner() {
+            window.location.href = "/admin/get_winner";
+        }
+    </script>
+</body>
+</html>
