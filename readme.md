@@ -4,12 +4,6 @@ This project presents an end-to-end electronic voting system that combines block
 
 ---
 
-## 📘 Project Overview
-
-The primary objective of this platform is to simulate a decentralized voting process where each voter's identity is authenticated before they are granted access to cast a ballot. The system cross-verifies individual details such as National ID and date of birth, and validates their identity through facial recognition. Upon successful verification, the voter’s choice is recorded on the Ethereum blockchain using a Solidity-based smart contract. This guarantees both vote integrity and auditability. The implementation is designed primarily for academic exploration and prototype demonstration.
-
----
-
 ## 🖼️ System Interface
 
 ### Voter Interaction Panel
@@ -56,8 +50,8 @@ To replicate or test the system in a local environment, follow these steps:
 
 1. Use `synthetic_dataset_making.py` to auto-generate voter data including images and credentials  
 2. Start the Ganache blockchain simulator  
-3. Deploy the voting smart contract via Remix or Truffle  
-4. Update the contract address and ABI in your config file (`web3_config.py`)  
+3. Update the contract address and ABI 
+4. Contract will be Deployed once the election committee run the app 
 5. Run the Flask app with `python app.py`  
 6. Access the voter and admin dashboards in the browser  
 7. Simulate voter login using QR code and face input  
@@ -97,6 +91,6 @@ This system was developed as part of an academic research initiative titled:
 
 **"Leveraging Blockchain and Machine Learning for a Secure and Transparent Voting System"**
 
-The project investigates how decentralized technologies and artificial intelligence can be combined to create secure, accessible, and trustworthy electronic voting platforms. It serves as a practical demonstration of how smart contracts and real-time biometric authentication can mitigate key risks in digital election environments.
+The project investigates how decentralized technologies and machine learning can be combined to create secure, accessible, and trustworthy electronic voting platforms. It serves as a practical demonstration of how smart contracts and real-time biometric authentication can mitigate key risks in digital election environments.
 
 ---
