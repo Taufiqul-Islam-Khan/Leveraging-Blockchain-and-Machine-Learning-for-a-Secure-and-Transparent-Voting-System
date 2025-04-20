@@ -1,6 +1,6 @@
 # Leveraging Blockchain and Machine Learning for a Secure and Transparent Voting System
 
-This project presents an end-to-end electronic voting system that combines blockchain technology with facial recognition to deliver a secure, transparent, and verifiable voting experience. By utilizing smart contracts for immutable vote storage and machine learning for real-time biometric verification, the system ensures that only eligible voters can participate—and that every vote is tamper-proof and traceable without compromising personal privacy.
+This project introduces a full-stack e-voting platform that integrates **blockchain technology** with **machine learning-based facial recognition** to ensure secure, verifiable, and privacy-conscious electoral processes. Designed with decentralization, voter identity protection, and tamper-resistance in mind, the system enables authenticated individuals to cast immutable votes through a smart contract governed interface—backed by real-time biometric verification.
 
 ---
 
@@ -14,83 +14,80 @@ This project presents an end-to-end electronic voting system that combines block
 
 ![Election Committee’s Activity](ELECTIONCOMMITTEE.png)
 
-These interfaces demonstrate how voters and election officials interact with the system—covering registration, authentication, candidate viewing, vote casting, and result monitoring.
+These panels represent the distinct workflows for voters and election officials—covering identity validation, vote submission, candidate management, and result auditing.
 
 ---
 
 ## 🛠️ Technologies Implemented
 
-| Component      | Stack                        |
-|----------------|------------------------------|
-| Web Interface  | Flask, HTML, CSS (Jinja2)    |
-| Backend Logic  | Python (Flask Framework)     |
-| Blockchain     | Solidity, Ganache, Web3.py   |
-| Face Matching  | OpenCV, TensorFlow/Keras     |
-| Data Handling  | JSON / CSV (local files)     |
+| Component       | Stack                            |
+|------------------|----------------------------------|
+| Web Interface    | Flask, HTML5/CSS (Jinja2 Templating) |
+| Application Logic| Python (Flask MVC Framework)     |
+| Blockchain Layer | Solidity, Ganache, Web3.py       |
+| Biometric Auth   | FaceNet (TensorFlow/Keras), OpenCV |
+| Data Storage     | Local Files (CSV/JSON)           |
 
-To facilitate communication between the smart contract and Python-based backend, the system leverages `web3.py`. This enables vote transactions and real-time interactions between the frontend and the blockchain layer.
+The application uses `web3.py` to bridge the Python-based backend with the Ethereum blockchain, allowing seamless interaction with deployed smart contracts during voting operations.
 
 ---
 
 ## ✅ Key Features
 
-- QR code-based login tied to voter identity  
-- Facial recognition using machine learning for voter verification  
-- Blockchain-powered vote storage for tamper-proof records  
-- Real-time monitoring of voting progress and election closure  
-- Admin panel for candidate management and result publishing  
-- Voter access control via NID and DOB matching  
-- Prevention of duplicate voting and unauthorized access  
+- 🔒 **QR-based voter login** linked to verified facial identity  
+- 🧠 **Facial recognition authentication** using FaceNet embeddings  
+- ⛓️ **Ethereum smart contract** for secure, irreversible vote recording  
+- 📊 **Live result dashboards** updated in real time  
+- 🧾 **Election committee tools** for candidate entry, voter authorization, and result finalization  
+- 🧩 **Biographical validation** using synthetic registry (NID, DOB, Address)  
+- 🛡️ **Prevention of duplicate voting and identity spoofing**
 
 ---
 
 ## 🧪 Testing Guidelines
 
-To replicate or test the system in a local environment, follow these steps:
+To deploy and test this system in a local development environment:
 
-1. Use `synthetic_dataset_making.py` to auto-generate voter data including images and credentials  
-2. Start the Ganache blockchain simulator  
-3. Update the contract address and ABI 
-4. Contract will be Deployed once the election committee run the app 
-5. Run the Flask app with `python app.py`  
-6. Access the voter and admin dashboards in the browser  
-7. Simulate voter login using QR code and face input  
-8. Cast votes, close the election, and review the results  
+1. **Generate sample data**: Run `synthetic_dataset_making.py` to synthesize voter records and face associations  
+2. **Launch Ganache**: Start a local Ethereum instance with test accounts  
+3. **Deploy smart contract**: Use the election committee interface to deploy and initialize the contract  
+4. **Configure Web3**: Update contract address and ABI in the backend configuration  
+5. **Run application**: Execute `python app.py` to launch the Flask server  
+6. **Use browser interface**: Access voter/admin portals, authenticate via QR and facial scan, and simulate voting  
+7. **End election**: Observe real-time vote tally and system logs after election closure  
 
 ---
 
 ## 🔐 Privacy Considerations
 
-- Biometric data is never stored on-chain; only temporary face embeddings are processed for matching  
-- The blockchain stores anonymized vote hashes, not personally identifiable information  
-- Real-time facial authentication occurs locally and is never transmitted externally  
-- The design avoids permanent storage of sensitive data, aligning with best practices in digital privacy laws such as GDPR  
+- Facial embeddings are used transiently for matching; raw biometric images are neither stored on-chain nor persisted  
+- The blockchain ledger stores anonymized, hashed votes—ensuring that ballots cannot be linked back to voters  
+- Personal data is validated off-chain, mitigating exposure risks and adhering to privacy laws such as **GDPR**  
+- Voter session access is tightly bound to QR codes generated post-verification, adding a secondary authentication layer  
 
 ---
 
 ## 🌱 Future Improvements
 
-- Introduce **Decentralized Identifiers (DIDs)** for enhanced voter anonymity and portability  
-- Explore **Zero-Knowledge Proofs (ZKPs)** for vote eligibility verification without disclosing private data  
-- Deploy the system on public Ethereum testnets such as **Goerli** or **Sepolia** for real-world simulation  
-- Implement ML-based anomaly detection to flag suspicious voting patterns  
-- Extend mobile support with offline QR voter credentials  
+- 🔐 Integration of **Decentralized Identifiers (DIDs)** to strengthen identity portability and privacy  
+- 🧾 Adoption of **Zero-Knowledge Proofs (ZKPs)** for privacy-preserving eligibility verification  
+- 🌐 Deployment to public testnets such as **Goerli**, **Sepolia**, or **Polygon Mumbai**  
+- 📉 Implementation of ML-based **voting anomaly detection**  
+- 📱 Mobile platform support with **offline QR credential scanning**
 
 ---
 
 ## 📄 License
 
-This repository is distributed under the **MIT License**.  
-You are welcome to use, adapt, or expand this project with proper attribution to the original creator.
+Distributed under the **MIT License**.  
+You are free to use, modify, and build upon this project for academic, research, or non-commercial purposes. Please attribute original contributions accordingly.
 
 ---
 
 ## 🧾 Research Statement
 
-This system was developed as part of an academic research initiative titled:
+This repository was developed as part of a graduate research initiative under the title:
 
 **"Leveraging Blockchain and Machine Learning for a Secure and Transparent Voting System"**
 
-The project investigates how decentralized technologies and machine learning can be combined to create secure, accessible, and trustworthy electronic voting platforms. It serves as a practical demonstration of how smart contracts and real-time biometric authentication can mitigate key risks in digital election environments.
-
----
+The project aims to empirically explore how decentralized blockchain infrastructure and facial biometric authentication can jointly address the challenges of digital voter verification, tamper-proof ballot recording, and transparent result auditing. By demonstrating a hybrid on-chain/off-chain architecture, this work advances practical solutions for future digital democracies and regulatory-compliant electronic voting environments.

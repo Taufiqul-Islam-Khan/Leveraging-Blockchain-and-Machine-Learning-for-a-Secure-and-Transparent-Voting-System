@@ -1,7 +1,6 @@
 import atexit
 import csv
 import os
-
 import pandas as pd
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session, send_from_directory
 from web3 import Web3
